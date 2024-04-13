@@ -38,10 +38,10 @@ public class StudentH2Service implements StudentRepository {
 
     @Override
     public Student addStudent(Student student) {
-        db.update("insert into student(studentName, Gender, Standard) values (?, ?, ?)", student.getStudentName(),
+        db.update("insert into student(studentName, gender, standard) values (?, ?, ?)", student.getStudentName(),
                 student.getGender(), student.getStandard());
         Student savedStudent = db.queryForObject(
-                "select * from student where studentName = ? and Gender = ? and Standard = ?", new StudentRowMapper(),
+                "select * from student where studentName = ? and gender = ? and standard = ?", new StudentRowMapper(),
                 student.getStudentName(), student.getGender(), student.getStandard());
         return savedStudent;
     }
@@ -67,10 +67,10 @@ public class StudentH2Service implements StudentRepository {
             db.update("update student set studentName = ? where studentId =?", student.getStudentName(), studentId);
         }
         if (student.getGender() != null) {
-            db.update("update student set Gender = ? where studentId =?", student.getGender(), studentId);
+            db.update("update student set gender = ? where studentId =?", student.getGender(), studentId);
         }
         if (student.getStandard() != 0) {
-            db.update("update student set Standard = ? where studentId = ?", student.getStandard(), studentId);
+            db.update("update student set standard = ? where studentId = ?", student.getStandard(), studentId);
 
         }
         return getStudentById(studentId);
